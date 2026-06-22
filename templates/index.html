@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sentiment Analyzer</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="container">
+    <h1>Sentiment Analysis Web App</h1>
+
+    <form action="/analyze" method="POST">
+        <textarea name="text" rows="5" placeholder="Enter a sentence..." required></textarea>
+        <br>
+        <button type="submit">Analyze Sentiment</button>
+    </form>
+
+    {% if sentiment %}
+    <div class="result">
+        <h2>Result</h2>
+
+        <p><strong>Sentence:</strong> {{ text }}</p>
+
+        <p><strong>Sentiment:</strong> {{ sentiment }}</p>
+
+        <p><strong>Polarity Score:</strong> {{ score }}</p>
+
+        <!-- Add this part here -->
+        <p><strong>Interpretation:</strong>
+        {% if score > 0 %}
+            The sentence expresses a positive emotion.
+        {% elif score < 0 %}
+            The sentence expresses a negative emotion.
+        {% else %}
+            The sentence expresses a neutral emotion.
+        {% endif %}
+        </p>
+
+    </div>
+    {% endif %}
+
+</div>
+
+</body>
+</html>
